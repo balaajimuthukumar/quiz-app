@@ -13,7 +13,7 @@ let sportsChoices2 = ["wiljones","williamsonjones","wilsonjones","KevinPeterson"
 
 let sportsChoices3 = ["sachin","sunilgavaskar","kapildev","lalaamarnath"];
 
-let sportsAnswers = {0:"ForceIndia",1:"sunilgavaskar",2:"wilsonjones",3:"lalaAmarnath"}
+let sportsAnswers = {0:"ForceIndia",1:"sunilgavaskar",2:"wilsonjones",3:"lalaAmarnath"};
 
 let score = 0;
 let i = 0;
