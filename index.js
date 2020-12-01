@@ -1,3 +1,4 @@
+const firebase = require('firebase');
 const rlsync = require('readline-sync');
 const chalk = require('chalk');
 let yellow = chalk.yellow;
@@ -52,3 +53,4 @@ function gameManager(){
 }
 
 quiz();
+
