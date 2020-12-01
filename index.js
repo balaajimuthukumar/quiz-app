@@ -7,11 +7,11 @@ let Sports = ["First indian Formula1 Team?","The first Indian Batsman to complet
 
 let sportsChoices0 = ["ForceIndia","RacingPoint","Mercedes","RedBull"];
 
-let sportsChoices1 = ["virendarShewag","sunilgavaskar","kapilDev","lalaAmarnath"];
+let sportsChoices1 = ["virendarShewag","sunilgavaskar","kapildev","lalaAmarnath"];
 
-let sportsChoices2 = ["wiljones","williamsonJones","wilsonjones","KevinPeterson"];
+let sportsChoices2 = ["wiljones","williamsonjones","wilsonjones","KevinPeterson"];
 
-let sportsChoices3 = ["Sachin","sunilgavaskar","kapilDev","lalaAmarnath"];
+let sportsChoices3 = ["sachin","sunilgavaskar","kapildev","lalaamarnath"];
 
 let sportsAnswers = {0:"ForceIndia",1:"sunilgavaskar",2:"wilsonjones",3:"lalaAmarnath"}
 
