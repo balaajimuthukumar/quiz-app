@@ -1,9 +1,7 @@
-const serviceAccount = require('./quizapp-011220-firebase-adminsdk-zywuo-97a485084c.json');
+const serviceAccount = require('./quizapp-011220-firebase-adminsdk-zywuo-f224ce3914.json');
 const firebase_admin = require('firebase-admin');
 const rlsync = require('readline-sync');
 const chalk = require('chalk');
-const { database } = require('firebase-admin');
-const { doesNotMatch } = require('assert');
 let yellow = chalk.yellow;
 let green = chalk.green;
 let red = chalk.red;
@@ -15,9 +13,11 @@ firebase_admin.initializeApp({
 
 var db = firebase_admin.firestore();
 
-let Sports = {};
+//This array will hold all the fresh prince related questions
+let freshprinceAr = [];
 
-let sportsAnswers = {};
+//This array will hold all the fresh prince related answers
+let freshprinceAns = [];
 
 let user = "";
 let email = "";
@@ -44,11 +44,12 @@ async function firebaseWelcome(){
 //of a particular type in a single array
 async function firebaseQues(){
     const snap = await db.collection('questions').get();
-    var value = snap.docs;
   await firebaseChoice();
   await firebaseAnswers();
       for(let val of snap.docs){
-        Sports = val.data();
+        for(const [key, value] of Object.entries(val.data())){
+          freshprinceAr.push(value);
+        }
       };
   quiz();
   return "done";
@@ -59,15 +60,19 @@ async function firebaseQues(){
 async function firebaseAnswers(){
   const snap = await db.collection('answers').get();
       for(let val of snap.docs){
-        sportsAnswers = val.data();
+        for(const [key, value] of Object.entries(val.data())){
+          freshprinceAns.push(value);
+        }
+        freshprinceAnswers = val.data();
       };
+      console.log(freshprinceAns);
   return "done";
 }
 
 //This function is for choice array (i,e) every question will have 4 choices and this function will 
 //create that array
 async function firebaseChoice(){
-  const snap = await db.collection('SportsChoice').get();
+  const snap = await db.collection('FreshPrinceChoice').get();
       for(let val of snap.docs){
         choiceArr.push(val.data());
       };
@@ -76,12 +81,12 @@ async function firebaseChoice(){
 
 //This function is for score updation (i,e) This function will update the final score of 
 //the users to the db and displays the high score
-const scoreDocRef = db.collection('scoreCard').doc('Sports');
+const scoreDocRef = db.collection('scoreCard').doc('FreshPrince');
 async function firebaseScore(score){
   let obj = {};
   obj[user] = score;
       await scoreDocRef.update(obj);
-      var overallDict = await db.collection('scoreCard').doc('Sports').get();
+      var overallDict = await db.collection('scoreCard').doc('FreshPrince').get();
   let sortable = [];
   let  dict = overallDict.data()
       for(let user in dict){
@@ -97,18 +102,18 @@ async function firebaseScore(score){
 
 //This function will check the answers and increments the score
 function scoreCard(i,index){
-    if(sportsAnswers[i]===choiceArr[i][index]){
+    if(freshprinceAns[i]===choiceArr[i][index]){
       score+=1;
     }
 }
 
 //!!!!!!!This function will run the game!!!!!!!!
 function quiz(){
-    console.log(red(".....Welcome to Indian Sports Quiz...... \n"));
+    console.log(red(".....Welcome to FreshPrince Of Bel-Air Quiz...... \n"));
     score = 0;
-            for(i=0;i<Object.keys(Sports).length;i++)
+            for(i=0;i<(Object.keys(freshprinceAr).length-choiceArr.length);i++)
           {
-              console.log(green(Sports[i]));
+              console.log(green(freshprinceAr[i]));
               index = rlsync.keyInSelect(Object.values(choiceArr[i]),'');
 
               scoreCard(i,index);
