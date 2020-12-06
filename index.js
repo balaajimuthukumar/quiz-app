@@ -65,7 +65,6 @@ async function firebaseAnswers(){
         }
         freshprinceAnswers = val.data();
       };
-      console.log(freshprinceAns);
   return "done";
 }
 
